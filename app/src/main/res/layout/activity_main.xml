@@ -24,6 +24,13 @@
         android:textSize="14sp"
         />
 
+    <com.onopry.facetrackingapp.FaceContourOverlay
+        android:id="@+id/contourOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

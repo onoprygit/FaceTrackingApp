@@ -31,7 +31,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun createCameraManager() {
-        cameraManager = CameraManager(this, this, binding.viewFinder)
+        cameraManager = CameraManager(
+            this,
+            this,
+            binding.viewFinder,
+            binding.contourOverlay
+        )
     }
 
     private fun checkPermissions() {
