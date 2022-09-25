@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         createCameraManager()
         checkPermissions()
 
-        binding.switchCameraButton.setOnClickListener { cameraManager.switchCamera() }
+        binding.switchCameraImg.setOnClickListener { cameraManager.switchCamera() }
 
     }
 
