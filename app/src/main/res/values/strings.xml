@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">FaceTrackingApp</string>
+
+    <!--XML-->
+    <string name="switch_camera">Switch camera</string>
+
+    <!--Permission denied alert dialog -->
+    <string name="alert_title">Permission denied</string>
+    <string name="alert_message">You have denied permission forever. You can change your decision in app settings. Would you like to open app settings?</string>
+    <string name="alert_button">Open</string>
+
 </resources>

@@ -16,21 +16,29 @@ import com.onopry.facetrackingapp.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var cameraManager: CameraManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        createCameraManager()
         checkPermissions()
 
+        binding.switchCameraButton.setOnClickListener { cameraManager.switchCamera() }
 
+    }
+
+    private fun createCameraManager() {
+        cameraManager = CameraManager(this, this, binding.viewFinder)
     }
 
     private fun checkPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) ==
             PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(this, "opening camera", Toast.LENGTH_SHORT).show()
+            cameraManager.startCamera()
         } else {
             requestPermissions(
                 arrayOf(Manifest.permission.CAMERA),
@@ -50,6 +58,7 @@ class MainActivity : AppCompatActivity() {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // start camera
                     Toast.makeText(this, "opening camera", Toast.LENGTH_SHORT).show()
+                    cameraManager.startCamera()
                 } else {
                     if (!shouldShowRequestPermissionRationale(Manifest.permission.CAMERA)) {
                         onPermissionNotGrantedForever()
@@ -71,12 +80,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "Permissions are denied forever", Toast.LENGTH_SHORT).show()
         } else {
             AlertDialog.Builder(this)
-                .setTitle("Permission denied")
-                .setMessage("""You have denied permission forever.
-                    | You can change your decision in app settings.
-                    | Would you like to open app settings?
-                """.trimMargin())
-                .setPositiveButton("Open") { _, _ -> startActivity(appSettingsIntent) }
+                .setTitle(R.string.alert_title)
+                .setMessage(R.string.alert_message)
+                .setPositiveButton(R.string.alert_button) { _, _ -> startActivity(appSettingsIntent) }
                 .create()
                 .show()
         }
@@ -84,6 +90,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun onPermissionNotGrantedOnce() {
         Toast.makeText(this, "Camera permission denied", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cameraManager.removeCameraExecutor()
     }
 
     companion object {
