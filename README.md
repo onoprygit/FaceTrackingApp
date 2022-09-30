@@ -1,12 +1,12 @@
 ### FaceTrackingApp
 Тестовое задание на позицию стажера Android. Это приложение по распонаванию лиц на изображении. Приложение для задания 3.
 
-##Технологии
+## Технологии
  - Kotlin
  - CameraX
  - Google Ml-Kit
 
-##Скриншоты
+## Скриншоты
 
 ![Back camera](https://github.com/onoprygit/test/blob/master/screenshot_faceDetection_backCamera.png)
 ![Front camera](https://github.com/onoprygit/test/blob/master/screenshot_faceDetection_frontCamera.png)
